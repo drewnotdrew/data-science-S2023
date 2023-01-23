@@ -1,21 +1,14 @@
----
-title: "Setup: Function Basics"
-date: 2020-05-03
-output: github_document
-time: 10
-reading: 10
-editor_options: 
-  markdown: 
-    wrap: 72
----
+Setup: Function Basics
+================
+2020-05-03
 
 # Setup: Function Basics
 
 *Purpose*: Functions are our primary tool in carying out data analysis
 with the `tidyverse`. It is unreasonable to expect yourself to memorize
-every function and all its details. To that end, we'll learn some basic
+every function and all its details. To that end, we’ll learn some basic
 *function literacy* in R; how to inspect a function, look up its
-documentation, and find examples on a function's use.
+documentation, and find examples on a function’s use.
 
 *Reading*: [Programming
 Basics](https://rstudio.cloud/learn/primers/1.2). *Topics*: `functions`,
@@ -23,15 +16,20 @@ Basics](https://rstudio.cloud/learn/primers/1.2). *Topics*: `functions`,
 
 ### **q1** How do you find help on a function? Get help on the built-in `rnorm` function.
 
-```{r rnorm-help, eval=FALSE}
+``` r
 ?rnorm
 ```
 
 ### **q2** How do you show the source code for a function?
 
-```{r rnorm-source}
+``` r
 rnorm
 ```
+
+    ## function (n, mean = 0, sd = 1) 
+    ## .Call(C_rnorm, n, mean, sd)
+    ## <bytecode: 0x000001fd45080e10>
+    ## <environment: namespace:stats>
 
 ### **q3** Using either the documentation or the source, determine the arguments for `rnorm`.
 
@@ -44,10 +42,15 @@ list all available packages?
 
 The **examples** in the help documentation are often *extremely* helpful
 for learning how to use a function (or reminding yourself how its used)!
-Get used to checking the examples, as they're a great resource.
+Get used to checking the examples, as they’re a great resource.
 
-```{r}
+``` r
 ?library
+```
+
+    ## starting httpd help server ... done
+
+``` r
 library() # lists all avalible packages.
 ```
 

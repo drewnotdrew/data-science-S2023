@@ -1,7 +1,7 @@
 Getting Started: Diamonds
 ================
-(Your name here)
-2020-
+Drew Pang
+2023-1-25
 
 - <a href="#grading-rubric" id="toc-grading-rubric">Grading Rubric</a>
   - <a href="#individual" id="toc-individual">Individual</a>
@@ -132,8 +132,9 @@ ggplot(diamonds) +
 **Observations**:
 
 - Price increases with carat.
-- In general, diamonds are more expensive with a better cut, but price
-  is not affected by the cut as much as with the carat.
+- The cut of the diamond does not appear to noticeably affect the price
+  of diamonds, though there are less diamonds with a “fair” cut at
+  higher price points.
 - At every price point, there exists diamonds with cuts across the
   spectrum. At a particular price point, if a diamond has a worse cut,
   it likely has a higher carat.

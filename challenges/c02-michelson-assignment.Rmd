@@ -1,7 +1,7 @@
 ---
 title: "Michelson Speed-of-light Measurements"
-author: "(Your name here)"
-date: 2020-
+author: "Drew Pang"
+date: 2023-2-8
 output:
   github_document:
     toc: true

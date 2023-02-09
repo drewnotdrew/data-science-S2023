@@ -1,7 +1,7 @@
 Michelson Speed-of-light Measurements
 ================
-(Your name here)
-2020-
+Drew Pang
+2023-2-8
 
 - [Grading Rubric](#grading-rubric)
   - [Individual](#individual)

@@ -147,7 +147,6 @@ df_stang_long %>%
     mapping = aes(y = mu, color = angle, size = E)) +
     ylab("Poission's Ratio") +
     xlab("Thickness")
-  
 ```
 
 **Observations**:

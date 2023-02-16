@@ -1,7 +1,7 @@
 ---
 title: "Aluminum Data"
-author: "(Your name here)"
-date: 2020-
+author: "Drew Pang"
+date: 2023-02-15
 output:
   github_document:
     toc: true
@@ -26,7 +26,7 @@ Unlike exercises, **challenges will be graded**. The following rubrics define ho
 <!-- ------------------------- -->
 
 | Category    | Needs Improvement                                                                                                | Satisfactory                                                                                                               |
-|-------------|------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+|--------------|----------------------------|-------------------------------|
 | Effort      | Some task **q**'s left unattempted                                                                               | All task **q**'s attempted                                                                                                 |
 | Observed    | Did not document observations, or observations incorrect                                                         | Documented correct observations based on analysis                                                                          |
 | Supported   | Some observations not clearly supported by analysis                                                              | All observations clearly supported by analysis (table, graph, etc.)                                                        |
@@ -71,12 +71,19 @@ Note that these data are not tidy! The data in this form are convenient for repo
 ```{r q1-task}
 ## TASK: Tidy `df_stang`
 df_stang_long <-
-  df_stang
+  df_stang %>%
+  pivot_longer(
+    names_to = c(".value", "angle"),
+    names_sep = "_",
+    cols = c("E_00":"mu_90")
+  ) %>%
+  filter(E > as.integer(0)) %>%
+  mutate(angle = as.integer(angle))
 
 df_stang_long
 ```
 
-Use the following tests to check your work.
+AUse the following tests to check your work.
 
 ```{r q1-tests}
 ## NOTE: No need to change this
@@ -84,7 +91,7 @@ Use the following tests to check your work.
 assertthat::assert_that(
               setequal(
                 df_stang_long %>% names,
-                c("thick", "alloy", "angle", "E", "nu")
+                c("thick", "alloy", "angle", "E", "mu")
               )
             )
 ## Dimensions
@@ -108,20 +115,23 @@ print("Very good!")
 ### **q2** Perform a basic EDA on the aluminum data *without visualization*. Use your analysis to answer the questions under *observations* below. In addition, add your own *specific* question that you'd like to answer about the data---you'll answer it below in q3.
 
 ```{r q2-task}
-##
+glimpse(df_stang_long)
+n_distinct(df_stang_long$alloy)
+n_distinct(df_stang_long$angle)
+n_distinct(df_stang_long$thick)
 ```
 
 **Observations**:
 
 -   Is there "one true value" for the material properties of Aluminum?
-    -   (Your response here)
+    -   No, there is some variation. However, a cursory glance at the data shows that the variation could be due to natural unaccounted for variables.
 -   How many aluminum alloys are in this dataset? How do you know?
-    -   (Your response here)
+    -   The `n_distinct` function reports a value of 1 when fed the `alloy` column.
 -   What angles were tested?
-    -   (Your response here)
+    -   The `n_distinct` function reports a value of 3 when fed the `angle` column.
 -   What thicknesses were tested?
-    -   (Your response here)
--   (Write your own question here)
+    -   There are four distinct thicknesses. 0.022, 0.032, 0.064, and 0.081.
+-   Does Poission's ratio change with specimen thickness?
 
 ## Visualize
 
@@ -131,11 +141,18 @@ print("Very good!")
 
 ```{r q3-task}
 ## TASK: Investigate your question from q1 here
+df_stang_long %>%
+  ggplot(aes(thick, "Poission's Ratio")) +
+  geom_point(
+    mapping = aes(y = mu, color = angle, size = E)) +
+    ylab("Poission's Ratio") +
+    xlab("Thickness")
+  
 ```
 
 **Observations**:
 
--   (Address your question from q1 here)
+-   The variation of Poission's ratio is quite small, small enough where it could be due to environmental factors unaccounted for in this dataset. This makes sense - the Poission Ratio of a material should not change based on the geometry of the part.
 
 ### **q4** Consider the following statement:
 
@@ -147,7 +164,7 @@ Note that the "amount of material" would vary with the thickness of a tested pla
 ## NOTE: No need to change; run this chunk
 df_stang_long %>%
 
-  ggplot(aes(nu, E, color = as_factor(thick))) +
+  ggplot(aes(mu, E, color = as_factor(thick))) +
   geom_point(size = 3) +
   theme_minimal()
 ```
@@ -155,7 +172,9 @@ df_stang_long %>%
 **Observations**:
 
 -   Does this graph support or contradict the claim above?
-    -   (Your response here)
+    -   Whether or not the graph supports the claim heavily depends on context on elasticity of materials. The units of elasticity are not mentioned for this dataset, but given that they are around 10,000, and the elasticity of aluminum is around 10,000 ksi, we can make an educated guess that the units are in ksi.
+    -   The elasticity of steel is approximately 30,000 ksi, or roughly triple that of aluminum. The difference between these two is enough where variation smaller than 1000 ksi could be attributed to natural variation.
+    -   While the graph supports the claim that elasticity is an intensive property given proper context, it does not display it convincingly. A sense of scale is needed, perhaps a line showing the average elasticity of the data, and a line for the typical elasticity of steel.
 
 # References
 

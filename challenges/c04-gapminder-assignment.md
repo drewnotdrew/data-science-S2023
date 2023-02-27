@@ -334,19 +334,83 @@ the relationship between variables, or something else entirely.
 
 ``` r
 ## TASK: Your first graph
-# gapminder %>% 
+gapminder %>%
+  filter(year == year_min | year == year_max) %>%
+  ggplot(aes(x = lifeExp, y = continent)) + 
+  geom_boxplot() + 
+  coord_flip() + 
+  facet_wrap(vars(year)) + 
+  geom_point(
+    data = . %>% filter(country %in% c("Kuwait", "Switzerland", "United States")),
+    mapping = aes(color = country),
+    size = 2
+  )
 ```
 
-- (Your notes and observations here)
+![](c04-gapminder-assignment_files/figure-gfm/q5-task1-1.png)<!-- -->
+
+- Across the board, life expectancy has gone up in all continents.
+- Despite Kuwait’s very large GDP per capita, their life expectancy is
+  not the highest in the world, let alone just in Asia.
+- The Americas have the largest range for life expectancy in 1952, while
+  Africa has the largest range in 2007. It is possible that there is a
+  large development disparity in Africa.
 
 ``` r
 ## TASK: Your second graph
+gapminder %>%
+  filter(year == year_max) %>%
+  arrange(desc(lifeExp))
 ```
 
-- (Your notes and observations here)
+    ## # A tibble: 142 × 6
+    ##    country          continent  year lifeExp       pop gdpPercap
+    ##    <fct>            <fct>     <int>   <dbl>     <int>     <dbl>
+    ##  1 Japan            Asia       2007    82.6 127467972    31656.
+    ##  2 Hong Kong, China Asia       2007    82.2   6980412    39725.
+    ##  3 Iceland          Europe     2007    81.8    301931    36181.
+    ##  4 Switzerland      Europe     2007    81.7   7554661    37506.
+    ##  5 Australia        Oceania    2007    81.2  20434176    34435.
+    ##  6 Spain            Europe     2007    80.9  40448191    28821.
+    ##  7 Sweden           Europe     2007    80.9   9031088    33860.
+    ##  8 Israel           Asia       2007    80.7   6426679    25523.
+    ##  9 France           Europe     2007    80.7  61083916    30470.
+    ## 10 Canada           Americas   2007    80.7  33390141    36319.
+    ## # … with 132 more rows
+
+``` r
+gapminder %>%
+  filter(country == "Japan" | country == "Hong Kong, (China)" | country == "Iceland" | country == "Switzerland" | country == "United States") %>%
+  ggplot(aes(x = year, y = lifeExp, color = country)) + 
+  geom_line()
+```
+
+![](c04-gapminder-assignment_files/figure-gfm/q5-task2-1.png)<!-- -->
+
+- I first filtered for the max year observations, then looked at the top
+  countries for life expectancy. I pulled the top three along with the
+  United States as a refrence.
+- Life expectancy in these four countries goes up a noticeable amount. I
+  though it would be a lot less, but a 10 year life expectancy increase
+  in all countries is quite an improvement in just 50 years.
 
 ``` r
 ## TASK: Your third graph
+gapminder %>%
+  filter((year == year_min | year == year_max) & pop < 5e8) %>%
+  ggplot(aes(x = pop, y = continent)) + 
+  geom_boxplot() + 
+  coord_flip() + 
+  facet_wrap(vars(year)) + 
+  geom_point(
+    data = . %>% filter(country %in% c("Kuwait", "Switzerland", "United States")),
+    mapping = aes(color = country),
+    size = 2
+  )
 ```
 
-- (Your notes and observations here)
+![](c04-gapminder-assignment_files/figure-gfm/q5-task3-1.png)<!-- -->
+
+- In general, the world population goes up. Asia in particular has a
+  much larger range between the 25th and 75th percentiles.
+- The United States remained

@@ -203,19 +203,52 @@ Now it's your turn! We just went through guided EDA considering the GDP per capi
 
 ```{r q5-task1}
 ## TASK: Your first graph
-# gapminder %>% 
+gapminder %>%
+  filter(year == year_min | year == year_max) %>%
+  ggplot(aes(x = lifeExp, y = continent)) + 
+  geom_boxplot() + 
+  coord_flip() + 
+  facet_wrap(vars(year)) + 
+  geom_point(
+    data = . %>% filter(country %in% c("Kuwait", "Switzerland", "United States")),
+    mapping = aes(color = country),
+    size = 2
+  )
 ```
 
--   (Your notes and observations here)
+-   Across the board, life expectancy has gone up in all continents.
+-   Despite Kuwait's very large GDP per capita, their life expectancy is not the highest in the world, let alone just in Asia.
+-   The Americas have the largest range for life expectancy in 1952, while Africa has the largest range in 2007. It is possible that there is a large development disparity in Africa.
 
 ```{r q5-task2}
 ## TASK: Your second graph
+gapminder %>%
+  filter(year == year_max) %>%
+  arrange(desc(lifeExp))
+
+gapminder %>%
+  filter(country == "Japan" | country == "Hong Kong, (China)" | country == "Iceland" | country == "Switzerland" | country == "United States") %>%
+  ggplot(aes(x = year, y = lifeExp, color = country)) + 
+  geom_line()
 ```
 
--   (Your notes and observations here)
+-   I first filtered for the max year observations, then looked at the top countries for life expectancy. I pulled the top three along with the United States as a refrence.
+-   Life expectancy in these four countries goes up a noticeable amount. I though it would be a lot less, but a 10 year life expectancy increase in all countries is quite an improvement in just 50 years.
 
 ```{r q5-task3}
 ## TASK: Your third graph
+gapminder %>%
+  filter((year == year_min | year == year_max) & pop < 5e8) %>%
+  ggplot(aes(x = pop, y = continent)) + 
+  geom_boxplot() + 
+  coord_flip() + 
+  facet_wrap(vars(year)) + 
+  geom_point(
+    data = . %>% filter(country %in% c("Kuwait", "Switzerland", "United States")),
+    mapping = aes(color = country),
+    size = 2
+  )
 ```
 
--   (Your notes and observations here)
+-   In general, the world population goes up. Asia in particular has a much larger range between the 25th and 75th percentiles.
+-   The United States remained

@@ -1,7 +1,7 @@
 Gapminder
 ================
 Drew Pang
-2023-02-26
+2023-26-02
 
 - [Grading Rubric](#grading-rubric)
   - [Individual](#individual)
@@ -413,4 +413,5 @@ gapminder %>%
 
 - In general, the world population goes up. Asia in particular has a
   much larger range between the 25th and 75th percentiles.
-- The United States remained
+- The United States remained on of the most populous nations in the
+  Americas.

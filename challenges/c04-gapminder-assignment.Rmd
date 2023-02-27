@@ -1,7 +1,7 @@
 ---
 title: "Gapminder"
 author: "Drew Pang"
-date: 2023-02-26
+date: 2023-26-02
 output:
   github_document:
     toc: true
@@ -251,4 +251,4 @@ gapminder %>%
 ```
 
 -   In general, the world population goes up. Asia in particular has a much larger range between the 25th and 75th percentiles.
--   The United States remained
+-   The United States remained on of the most populous nations in the Americas.

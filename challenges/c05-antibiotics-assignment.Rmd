@@ -106,6 +106,16 @@ Note that your visual must be *qualitatively different* from *all* of your other
 df_antibiotics_longer %>%
   ggplot(aes(x = MIC, y = bacteria)) +
   geom_col(aes(fill = Antibiotic, linetype = gram), position = "dodge2", color = "black")
+
+df_antibiotics_longer %>%
+   filter(bacteria != "Aerobacter aerogenes" & bacteria != "Klebsiella pneumoniae" & bacteria != "Mycobacterium tuberculosis" & bacteria != "Pseudomonas aeruginosa" & bacteria != "Escherichia coli") %>%
+  ggplot(aes(x = MIC, y = bacteria)) +
+  geom_col(aes(fill = Antibiotic, linetype = gram), position = "dodge2", color = "black")
+
+df_antibiotics_longer %>%
+   filter(MIC < 0.1 ) %>%
+  ggplot(aes(x = MIC, y = bacteria)) +
+  geom_col(aes(fill = Antibiotic, linetype = gram), position = "dodge2", color = "black")
 ```
 
 #### Visual 3 (Some variables)
@@ -151,7 +161,8 @@ Note that your visual must be *qualitatively different* from *all* of your other
 df_antibiotics_longer %>%
   ggplot(aes(bacteria, Antibiotic, color = gram)) +
   geom_point(aes(size = MIC)) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  coord_flip()
 ```
 
 ### **q2** Assess your visuals
@@ -166,7 +177,19 @@ There are **two questions** below; use your five visuals to help answer both Gui
 
 > How do the three antibiotics vary in their effectiveness against bacteria of different genera and Gram stain?
 
-*Observations* - What is your response to the question above? - (Write your response here) - Which of your visuals above (1 through 5) is **most effective** at helping to answer this question? - (Write your response here) - Why? - (Write your response here)
+*Observations* - What is your response to the question above?
+
+-   The first bar graph shows that Penicillin is not effective at treating Pseudo. aerug., but this is before filtering the data for a better bar graph.
+
+-    Neomycin is effect agains Salmonella, Staphy. air
+
+Which of your visuals above (1 through 5) is **most effective** at helping to answer this question?
+
+-   Visual 2, but I had to create two extra graphs with filtering such that very large bars no longer squished all of the data near zero.
+
+Why? - (Write your response here)
+
+-   Filtering for further plots was very simple with the bar graph, and the bars were easy to see, unlike the dots in the scatter plot.
 
 #### Guiding Question 2
 
@@ -174,7 +197,17 @@ In 1974 *Diplococcus pneumoniae* was renamed *Streptococcus pneumoniae*, and in 
 
 > Why was *Diplococcus pneumoniae* was renamed *Streptococcus pneumoniae*?
 
-*Observations* - What is your response to the question above? - (Write your response here) - Which of your visuals above (1 through 5) is **most effective** at helping to answer this question? - (Write your response here) - Why? - (Write your response here)
+*Observations* - What is your response to the question above?
+
+-   
+
+Which of your visuals above (1 through 5) is **most effective** at helping to answer this question?
+
+-   Visual 3
+
+(Write your response here) - Why? - (Write your response here)
+
+-   
 
 # References
 

@@ -27,7 +27,7 @@ Unlike exercises, **challenges will be graded**. The following rubrics define ho
 <!-- ------------------------- -->
 
 | Category    | Needs Improvement                                                                                                | Satisfactory                                                                                                               |
-|------------------|-----------------------------|-------------------------|
+|-------------------|-----------------------------|-------------------------|
 | Effort      | Some task **q**'s left unattempted                                                                               | All task **q**'s attempted                                                                                                 |
 | Observed    | Did not document observations, or observations incorrect                                                         | Documented correct observations based on analysis                                                                          |
 | Supported   | Some observations not clearly supported by analysis                                                              | All observations clearly supported by analysis (table, graph, etc.)                                                        |
@@ -159,6 +159,7 @@ Note that your visual must be *qualitatively different* from *all* of your other
 
 ```{r q1.5}
 df_antibiotics_longer %>%
+  filter(MIC < 0.1 ) %>%
   ggplot(aes(bacteria, Antibiotic, color = gram)) +
   geom_point(aes(size = MIC)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
@@ -181,15 +182,29 @@ There are **two questions** below; use your five visuals to help answer both Gui
 
 -   The first bar graph shows that Penicillin is not effective at treating Pseudo. aerug., but this is before filtering the data for a better bar graph.
 
--    Neomycin is effect agains Salmonella, Staphy. air
+-   Penicillin and Streptomycin are only effective against gram positive bacteria, while neomycin is effective against a mix of gram positive and negative bacteria.
+
+-   Neomycin is effect against Salmo. aureus, Staphy. albus, Salmon. schott., Salmon. typhosa, Brucella abortus, and Bacillus anthr.
+
+-   Penicillin is effective against Strepto. virid., Strepto. hemol., Staphyl. aureus, Staphyl albus, Diplo. pneumon., and Bacillus anthr.
+
+-   Streptomycin is effective agains Staphyl. aureus and Bacillus anthr.
+
+-   Neomycin is the only antibiotic effective against the genus Salmonella.
+
+-   Both Penicillin and Neomycin are effective against the genus Staphylococcus, but Neomycin is more effective (lower MIC).
+
+-   Penicillin is the only antibiotic effective against the genus Streptococcus, with the exception of the species Streptococcus fecalis.
 
 Which of your visuals above (1 through 5) is **most effective** at helping to answer this question?
 
+-   Visual 3 for the second observation, visual 2 for the rest.
 -   Visual 2, but I had to create two extra graphs with filtering such that very large bars no longer squished all of the data near zero.
 
 Why? - (Write your response here)
 
--   Filtering for further plots was very simple with the bar graph, and the bars were easy to see, unlike the dots in the scatter plot.
+-   Visual 3: Made it very easy to discern how gram positive and negative bacteria change the effectiveness of antibiotics.
+-   Visual 2: Filtering for further plots was very simple with the bar graph, and the bars were easy to see, unlike the dots in the scatter plot.
 
 #### Guiding Question 2
 
@@ -199,15 +214,15 @@ In 1974 *Diplococcus pneumoniae* was renamed *Streptococcus pneumoniae*, and in 
 
 *Observations* - What is your response to the question above?
 
--   
+-   With the exception of Streptococcus fecalis, all bacteria included in this data set are only effected by penicillin. *Diplococcus pneumoniae* is also only effected by pencillin, which is likely why is was renamed to *Streptococcus pneumoniae.* This is also likely why *Streptococcus fecalis* was renamed *Enterococcus fecalis.*
 
 Which of your visuals above (1 through 5) is **most effective** at helping to answer this question?
 
--   Visual 3
+-   Visual 3, the final variation with filtering set to remove all observations with an MIC higher than 0.1.
 
 (Write your response here) - Why? - (Write your response here)
 
--   
+-   The colors helped quickly discern which bacteria were effected by which antibiotics, which allowed me to see the pattern relating penicillin to Streptococcus.
 
 # References
 

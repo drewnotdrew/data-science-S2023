@@ -210,6 +210,24 @@ df_antibiotics_longer %>%
 
 ![](c05-antibiotics-assignment_files/figure-gfm/q1.2-1.png)<!-- -->
 
+``` r
+df_antibiotics_longer %>%
+   filter(bacteria != "Aerobacter aerogenes" & bacteria != "Klebsiella pneumoniae" & bacteria != "Mycobacterium tuberculosis" & bacteria != "Pseudomonas aeruginosa" & bacteria != "Escherichia coli") %>%
+  ggplot(aes(x = MIC, y = bacteria)) +
+  geom_col(aes(fill = Antibiotic, linetype = gram), position = "dodge2", color = "black")
+```
+
+![](c05-antibiotics-assignment_files/figure-gfm/q1.2-2.png)<!-- -->
+
+``` r
+df_antibiotics_longer %>%
+   filter(MIC < 0.1 ) %>%
+  ggplot(aes(x = MIC, y = bacteria)) +
+  geom_col(aes(fill = Antibiotic, linetype = gram), position = "dodge2", color = "black")
+```
+
+![](c05-antibiotics-assignment_files/figure-gfm/q1.2-3.png)<!-- -->
+
 #### Visual 3 (Some variables)
 
 In this visual you may show a *subset* of the variables (`penicillin`,
@@ -268,9 +286,11 @@ your other visuals.
 
 ``` r
 df_antibiotics_longer %>%
+  filter(MIC < 0.1 ) %>%
   ggplot(aes(bacteria, Antibiotic, color = gram)) +
   geom_point(aes(size = MIC)) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  coord_flip()
 ```
 
 ![](c05-antibiotics-assignment_files/figure-gfm/q1.5-1.png)<!-- -->
@@ -294,10 +314,48 @@ opportunity to think about why this is.**
 > How do the three antibiotics vary in their effectiveness against
 > bacteria of different genera and Gram stain?
 
-*Observations* - What is your response to the question above? - (Write
-your response here) - Which of your visuals above (1 through 5) is
-**most effective** at helping to answer this question? - (Write your
-response here) - Why? - (Write your response here)
+*Observations* - What is your response to the question above?
+
+- The first bar graph shows that Penicillin is not effective at treating
+  Pseudo. aerug., but this is before filtering the data for a better bar
+  graph.
+
+- Penicillin and Streptomycin are only effective against gram positive
+  bacteria, while neomycin is effective against a mix of gram positive
+  and negative bacteria.
+
+- Neomycin is effect against Salmo. aureus, Staphy. albus, Salmon.
+  schott., Salmon. typhosa, Brucella abortus, and Bacillus anthr.
+
+- Penicillin is effective against Strepto. virid., Strepto. hemol.,
+  Staphyl. aureus, Staphyl albus, Diplo. pneumon., and Bacillus anthr.
+
+- Streptomycin is effective agains Staphyl. aureus and Bacillus anthr.
+
+- Neomycin is the only antibiotic effective against the genus
+  Salmonella.
+
+- Both Penicillin and Neomycin are effective against the genus
+  Staphylococcus, but Neomycin is more effective (lower MIC).
+
+- Penicillin is the only antibiotic effective against the genus
+  Streptococcus, with the exception of the species Streptococcus
+  fecalis.
+
+Which of your visuals above (1 through 5) is **most effective** at
+helping to answer this question?
+
+- Visual 3 for the second observation, visual 2 for the rest.
+- Visual 2, but I had to create two extra graphs with filtering such
+  that very large bars no longer squished all of the data near zero.
+
+Why? - (Write your response here)
+
+- Visual 3: Made it very easy to discern how gram positive and negative
+  bacteria change the effectiveness of antibiotics.
+- Visual 2: Filtering for further plots was very simple with the bar
+  graph, and the bars were easy to see, unlike the dots in the scatter
+  plot.
 
 #### Guiding Question 2
 
@@ -308,10 +366,25 @@ and in 1984 *Streptococcus fecalis* was renamed *Enterococcus fecalis*
 > Why was *Diplococcus pneumoniae* was renamed *Streptococcus
 > pneumoniae*?
 
-*Observations* - What is your response to the question above? - (Write
-your response here) - Which of your visuals above (1 through 5) is
-**most effective** at helping to answer this question? - (Write your
-response here) - Why? - (Write your response here)
+*Observations* - What is your response to the question above?
+
+- With the exception of Streptococcus fecalis, all bacteria included in
+  this data set are only effected by penicillin. *Diplococcus
+  pneumoniae* is also only effected by pencillin, which is likely why is
+  was renamed to *Streptococcus pneumoniae.* This is also likely why
+  *Streptococcus fecalis* was renamed *Enterococcus fecalis.*
+
+Which of your visuals above (1 through 5) is **most effective** at
+helping to answer this question?
+
+- Visual 3, the final variation with filtering set to remove all
+  observations with an MIC higher than 0.1.
+
+(Write your response here) - Why? - (Write your response here)
+
+- The colors helped quickly discern which bacteria were effected by
+  which antibiotics, which allowed me to see the pattern relating
+  penicillin to Streptococcus.
 
 # References
 

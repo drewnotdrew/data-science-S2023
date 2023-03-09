@@ -5,18 +5,22 @@ date: 2020-06-04
 output: github_document
 time: 15
 reading: 30
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Vis: Lines
 
-*Purpose*: *Line plots* are a key tool for EDA. In contrast with a scatterplot,
-a line plot assumes the data have a *function* relation. This can create an
-issue if we try to plot data that do not satisfy our assumptions. In this
-exercise, we'll practice some best-practices for constructing line plots.
+*Purpose*: *Line plots* are a key tool for EDA. In contrast with a
+scatterplot, a line plot assumes the data have a *function* relation.
+This can create an issue if we try to plot data that do not satisfy our
+assumptions. In this exercise, we'll practice some best-practices for
+constructing line plots.
 
 *Reading*: [Line plots](https://rstudio.cloud/learn/primers/3.6)
-*Topics*: Welcome, Line graphs, Similar geoms (skip Maps)
-*Reading Time*: ~30 minutes
+*Topics*: Welcome, Line graphs, Similar geoms (skip Maps) *Reading
+Time*: \~30 minutes
 
 ```{r setup, include=FALSE}
 # knitr options
@@ -29,17 +33,17 @@ library(gapminder)
 
 ```
 
-### __q1__ The following graph doesn't work as its author intended. Based on what we learned in the reading, fix the following code.
+### **q1** The following graph doesn't work as its author intended. Based on what we learned in the reading, fix the following code.
 
 ```{r q1-task}
 ## TODO: Fix the following code
 gapminder %>%
   filter(continent == "Asia") %>%
-  ggplot(aes(year, lifeExp)) +
+  ggplot(aes(year, lifeExp, color = country)) +
   geom_line()
 ```
 
-### __q2__ A line plot makes *a certain assumption* about the underlying data. What assumption is this? How does that assumption relate to the following graph? Put differently, why is the use of `geom_line` a bad idea for the following dataset?
+### **q2** A line plot makes *a certain assumption* about the underlying data. What assumption is this? How does that assumption relate to the following graph? Put differently, why is the use of `geom_line` a bad idea for the following dataset?
 
 ```{r q2-vis}
 ## TODO: No need to edit; just answer the questions
@@ -49,11 +53,15 @@ mpg %>%
 
 ```
 
-**Observations**:
-- What does a line plot assume about the data?
-- How does the `mpg` dataset violate this assumption?
+**Observations**: - What does a line plot assume about the data? - How
+does the `mpg` dataset violate this assumption?
 
-### __q3__ The following graph shows both the raw data and a smoothed version. Describe the trends that you can see in the different curves.
+-   The line geom assumes that there is a single value for each x value,
+    which causes straight vertical lines when it has to jump up and down
+    to the different hwy mpg for each car in the dataset. We can fix
+    this by grouping by car.
+
+### **q3** The following graph shows both the raw data and a smoothed version. Describe the trends that you can see in the different curves.
 
 ```{r q3-task}
 ## TODO: No need to edit; just interpret the graph
@@ -64,12 +72,23 @@ economics %>%
   scale_color_discrete(name = "Source")
 ```
 
-**Observations**:
-- What can you tell based on the `Raw` data?
-- What can you tell based on the `Smoothed` data?
+**Observations**: - What can you tell based on the `Raw` data? - What
+can you tell based on the `Smoothed` data?
+
+-   The raw data shows peaks that are hidden in the smoothed data.
+
+-   The smoothed data is a lot easier to visualize the general trend of
+    the data.
+
+    -   The general data trends towards a higher number of unemployed
+        people.
 
 <!-- include-exit-ticket -->
+
 # Exit Ticket
+
 <!-- -------------------------------------------------- -->
 
-Once you have completed this exercise, make sure to fill out the **exit ticket survey**, [linked here](https://docs.google.com/forms/d/e/1FAIpQLSeuq2LFIwWcm05e8-JU84A3irdEL7JkXhMq5Xtoalib36LFHw/viewform?usp=pp_url&entry.693978880=e-vis05-lines-assignment.Rmd).
+Once you have completed this exercise, make sure to fill out the **exit
+ticket survey**, [linked
+here](https://docs.google.com/forms/d/e/1FAIpQLSeuq2LFIwWcm05e8-JU84A3irdEL7JkXhMq5Xtoalib36LFHw/viewform?usp=pp_url&entry.693978880=e-vis05-lines-assignment.Rmd).
